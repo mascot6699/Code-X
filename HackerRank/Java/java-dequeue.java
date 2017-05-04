@@ -23,17 +23,19 @@ public class test {
                     map.remove(last, val);
                 }
             }
-            if (!map.containsKey(num) || map.get(num) == 0) {
+            if (!map.containsKey(num)) {
                 ++curr;
             }
             deque.offerFirst(num);
             max = Math.max(max, curr);
 
             Integer val = map.get(num);
-            if (val == null) val = new Integer(0);
+            if (val == null)
+                val = 0;
             map.put(num, val+1);
         }
 
         System.out.println(max);
     }
 }
+
