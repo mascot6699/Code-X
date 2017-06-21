@@ -32,7 +32,3 @@ def find_successor(node):
     while node.parent and node.parent.right is node:
         node = node.parent
     return node.parent
-
-
-def merge_sorted_arrays_pythonic(sorted_arrays):
-    return list(heapq.merge(*sorted_arrays))
