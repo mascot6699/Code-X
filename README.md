@@ -18,3 +18,7 @@ Non-exhuastive list of questions solved on HackerRank Website
 Discrete Maths
 ---------------
 Implementation of concepts learned in from the book Concrete Mathematics
+
+JS World
+---------------
+Concepts of javascript and typescript
