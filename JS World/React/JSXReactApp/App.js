@@ -1,40 +1,77 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 class App extends Component{
+
     constructor() {
         super();
+        let r = Math.random() * 100
+        let r1 = Math.random() * 100
+        let r2 = Math.random() * 100
         this.state = {
             data: [
                 {
-                    "id":1,
+                    "id":r,
                     "name":"Foo",
                     "age":"20"
                 },
                 {
-                    "id":2,
+                    "id":r1,
                     "name":"Bar",
                     "age":"30"
                 },
                 {
-                    "id":3,
+                    "id":r2,
                     "name":"Baz",
                     "age":"40"
                 }
-            ]
+            ],
+            letter: "e"
         }
+        this.setStateHandler = this.setStateHandler.bind(this);
+        this.changeHeaderColour = this.changeHeaderColour.bind(this);
     }
+
+    setStateHandler() {
+        let r = Math.random() * 100
+        let newItem = {
+            "id": r,
+            "name": "Foo",
+            "age": "20"
+        }
+        var oldArray = this.state.data.slice();
+        oldArray.push(newItem);
+        this.setState({data: oldArray})
+    };
+
+    changeHeaderColour() {
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        var heading = document.getElementById('heading');
+        ReactDOM.findDOMNode(heading).style.color = getRandomColor();
+    };
+
     render(){
         return(
             <div>
                 <Header/>
-                <h3>Tripler fn with param "e" returns back "{this.props.tripler("e")}"</h3>
+                <button onClick = {this.setStateHandler}>Add Row</button>
+                <button onClick = {this.changeHeaderColour}>Change Header Colour</button>
+                <h4>Tripler fn with param "{this.state.letter}" returns back</h4>
+                <h4 id='triple-letter-answer'>{this.props.tripler(this.state.letter)}</h4>
                 <table>
                     <tbody>
                     {this.state.data.map((person, i) => <TableRow key = {i} data = {person} />)}
                     </tbody>
                 </table>
             </div>
-    );
+        );
     }
 }
 
@@ -45,7 +82,7 @@ class Header extends React.Component {
             color: '#ff891c'
         }
         return (
-            <h1 style = {myStyle}>
+            <h1 id='heading' style = {myStyle}>
                 {this.props.headerProp}
             </h1>
         );
@@ -55,13 +92,11 @@ class Header extends React.Component {
 class TableRow extends React.Component {
     render() {
         return (
-            <div>
-                <tr>
-                    <td>{this.props.data.id + this.props.data.id}</td>
-                    <td>{this.props.data.name}</td>
-                    <td>{this.props.data.age}</td>
-                </tr>
-            </div>
+            <tr>
+                <td>{this.props.data.id + this.props.data.id}</td>
+                <td>{this.props.data.name}</td>
+                <td>{this.props.data.age}</td>
+            </tr>
         );
     }
 }
