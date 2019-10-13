@@ -1,11 +1,38 @@
 import React, { Component } from 'react';
 
 class App extends Component{
+    constructor() {
+        super();
+        this.state = {
+            data: [
+                {
+                    "id":1,
+                    "name":"Foo",
+                    "age":"20"
+                },
+                {
+                    "id":2,
+                    "name":"Bar",
+                    "age":"30"
+                },
+                {
+                    "id":3,
+                    "name":"Baz",
+                    "age":"40"
+                }
+            ]
+        }
+    }
     render(){
         return(
             <div>
                 <Header/>
-                <Content/>
+                <h3>Tripler fn with param "e" returns back "{this.props.tripler("e")}"</h3>
+                <table>
+                    <tbody>
+                    {this.state.data.map((person, i) => <TableRow key = {i} data = {person} />)}
+                    </tbody>
+                </table>
             </div>
     );
     }
@@ -18,19 +45,34 @@ class Header extends React.Component {
             color: '#ff891c'
         }
         return (
-            <h1 style = {myStyle}>Hello World</h1>
+            <h1 style = {myStyle}>
+                {this.props.headerProp}
+            </h1>
         );
     }
 }
 
-class Content extends React.Component {
+class TableRow extends React.Component {
     render() {
         return (
             <div>
-                <h2>Content</h2>
-                <p>{1+1} => I can do use javascript expressions</p>
+                <tr>
+                    <td>{this.props.data.id + this.props.data.id}</td>
+                    <td>{this.props.data.name}</td>
+                    <td>{this.props.data.age}</td>
+                </tr>
             </div>
         );
+    }
+}
+
+Header.defaultProps = {
+    headerProp: "Header Content is from immutable prop",
+}
+
+App.defaultProps = {
+    tripler: (e) => {
+        return e + e + e
     }
 }
 
