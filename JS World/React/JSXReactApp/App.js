@@ -30,6 +30,8 @@ class App extends Component{
         }
         this.setStateHandler = this.setStateHandler.bind(this);
         this.changeHeaderColour = this.changeHeaderColour.bind(this);
+        this.updateLetter = this.updateLetter.bind(this);
+        this.textPickerFn = this.textPickerFn.bind(this);
     }
 
     setStateHandler() {
@@ -57,17 +59,29 @@ class App extends Component{
         ReactDOM.findDOMNode(heading).style.color = getRandomColor();
     };
 
+    updateLetter(e) {
+        this.setState({letter: e.target.value});
+    }
+
+    textPickerFn(e) {
+        this.setState({letter: e.target.innerHTML});
+    };
+
     render(){
         return(
             <div>
                 <Header/>
                 <button onClick = {this.setStateHandler}>Add Row</button>
                 <button onClick = {this.changeHeaderColour}>Change Header Colour</button>
+                <br/>
+                <p>Whatever you will input will be tripled</p>
+                <input type = "text" value={this.state.letter} onChange={this.updateLetter} />
+                <br/>
                 <h4>Tripler fn with param "{this.state.letter}" returns back</h4>
                 <h4 id='triple-letter-answer'>{this.props.tripler(this.state.letter)}</h4>
                 <table>
                     <tbody>
-                    {this.state.data.map((person, i) => <TableRow key = {i} data = {person} />)}
+                    {this.state.data.map((person, i) => <TableRow key={i} data={person} fn={this.textPickerFn} />)}
                     </tbody>
                 </table>
             </div>
@@ -95,7 +109,7 @@ class TableRow extends React.Component {
             <tr>
                 <td>{this.props.data.id + this.props.data.id}</td>
                 <td>{this.props.data.name}</td>
-                <td>{this.props.data.age}</td>
+                <td onClick={this.props.fn}>{this.props.data.age}</td>
             </tr>
         );
     }
