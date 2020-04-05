@@ -23,3 +23,6 @@ Notes
         - instance => 
     - [lots of operator](http://reactivex.io/rxjs/manual/overview.html#categories-of-operators)
     - [Example of merge](https://coursetro.com/posts/code/150/RxJS-Operators-Tutorial---Learn-How-to-Transform-Observables)
+
+---------
+
