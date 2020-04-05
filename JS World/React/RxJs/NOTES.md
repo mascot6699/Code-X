@@ -11,3 +11,15 @@ Notes
 - ReplaySubject => ReplaySubject allows you to dispatch any designated number of values.(first argument)
 - ReplaySubject accepts an optional second argument upon creation, which is referred to as the window time, and it's defined in milliseconds. 
 - AsyncSubject => AsyncSubject only emits the very last value, and will only do so once .complete() has been called on the subject.
+
+
+-------------
+
+- Operators
+    - methods that you can use on Observables (and Subjects) that allow you to change the original observable in some manner and return a new observable.
+    - doesn't change old one, just returns new one
+    - 2 types
+        - static => 
+        - instance => 
+    - [lots of operator](http://reactivex.io/rxjs/manual/overview.html#categories-of-operators)
+    - [Example of merge](https://coursetro.com/posts/code/150/RxJS-Operators-Tutorial---Learn-How-to-Transform-Observables)
